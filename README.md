@@ -18,7 +18,9 @@ Or install it yourself as:
 
 Once the gem is installed, just add this line to your `test_helper.rb`:
 
-    require 'minitest/filesystem'
+```ruby
+require 'minitest/filesystem'
+```
 
 ## Usage
 
@@ -35,23 +37,27 @@ Let's suppose the following filesystem structure exists:
 
 You can check if `root_dir` contains a specific structure:
 
-    assert_contains_filesystem("root_dir") do
-      file "file_1"
-      dir "subdir_1" do
-        file "subfile_1"
-      end
-      dir "subdir_2"
-    end
+```ruby
+assert_contains_filesystem("root_dir") do
+  file "file_1"
+  dir "subdir_1" do
+    file "subfile_1"
+  end
+  dir "subdir_2"
+end
+```
 
 or, if you prefer the expectation style:
 
-    filesystem {
-      file "file_1"
-      dir "subdir_1" do
-        file "subfile_1"
-      end
-      dir "subdir_2"
-    }.must_exist_within "root_dir"
+```ruby
+filesystem {
+  file "file_1"
+  dir "subdir_1" do
+    file "subfile_1"
+  end
+  dir "subdir_2"
+}.must_exist_within "root_dir"
+```
 
 Note that the match **need not to be exact** (i.e. there can be other files and
 directories inside `root_dir` that we don't care about).
