@@ -69,3 +69,9 @@ directories inside `root_dir` that we don't care about).
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Changelog
+
+### 0.0.1
+
+* Extract assertion and matcher from current projects
