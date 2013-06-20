@@ -28,9 +28,9 @@ Let's suppose the following filesystem structure exists:
   * `file_1`
   * `file_2`
   * `subdir_1/`
-    * `subfile_1`
-    * `subfile_2`
-    * `subsubdir_1/`
+      * `subfile_1`
+      * `subfile_2`
+      * `subsubdir_1/`
   * `subdir_2/`
 
 You can check if `root_dir` contains a specific structure:
