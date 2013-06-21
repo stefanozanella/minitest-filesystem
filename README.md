@@ -1,5 +1,10 @@
 # Minitest::Filesystem
 
+[![Gem Version](https://badge.fury.io/rb/minitest-filesystem.png)](http://badge.fury.io/rb/minitest-filesystem)
+[![Build Status](https://travis-ci.org/stefanozanella/minitest-filesystem.png?branch=master)](https://travis-ci.org/stefanozanella/minitest-filesystem)
+[![Code Climate](https://codeclimate.com/github/stefanozanella/minitest-filesystem.png)](https://codeclimate.com/github/stefanozanella/minitest-filesystem)
+[![Coverage Status](https://coveralls.io/repos/stefanozanella/minitest-filesystem/badge.png?branch=master)](https://coveralls.io/r/stefanozanella/minitest-filesystem?branch=master)
+
 Adds assertions and expectations to check filesystems content in a readable way.
 
 ## Installation
@@ -60,7 +65,7 @@ filesystem {
 ```
 
 Note that the match **need not to be exact** (i.e. there can be other files and
-directories inside `root_dir` that we don't care about).
+directories inside `root_dir` that the matcher won't care about).
 
 ## Contributing
 
