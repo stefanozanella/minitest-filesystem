@@ -1,7 +1,7 @@
 require 'pathname'
 
 module Minitest
-  module FileSystem
+  module Filesystem
     class Matcher
       def initialize(root, &block)
         @actual_tree = MatchingTree.new(root)

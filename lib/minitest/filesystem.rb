@@ -3,7 +3,7 @@ require "minitest/filesystem/matcher"
 
 module Minitest::Assertions
   def assert_contains_filesystem(dir, msg = nil, &block)
-    matcher = Minitest::FileSystem::Matcher.new(dir, &block)
+    matcher = Minitest::Filesystem::Matcher.new(dir, &block)
     assert matcher.match_found?, msg || matcher.message
   end
 
