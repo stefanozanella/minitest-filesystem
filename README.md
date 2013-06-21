@@ -77,9 +77,13 @@ directories inside `root_dir` that the matcher won't care about).
 
 ## Changelog
 
-### 0.0.1
+### 1.0.1
 
-* Extract assertion and matcher from current projects
+* Remove CamelCase naming.
+
+### 1.0.0
+
+* Add support for Ruby 1.8.
 
 ### 0.1.0
 
@@ -87,6 +91,6 @@ directories inside `root_dir` that the matcher won't care about).
 * Add more tests around assertion
 * Infect `must_exist_within` expectation
 
-### 1.0.0
+### 0.0.1
 
-* Add support for Ruby 1.8.
+* Extract assertion and matcher from current projects
