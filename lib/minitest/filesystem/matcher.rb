@@ -10,13 +10,13 @@ module MiniTest
       end
 
       def file(file)
-        entry(:file, file) && is_a?(:file, file)
+        entry(file, :file) && is_a?(file, :file)
       end
 
       def dir(dir, &block)
         matcher = self.class.new(@actual_tree.expand_path(dir), &block) if block_given?
 
-        entry(:directory, dir) && is_a?(:directory, dir) && subtree(matcher)
+        entry(dir, :directory) && is_a?(dir, :directory) && subtree(matcher)
       end
 
       def match_found?
@@ -30,20 +30,20 @@ module MiniTest
 
       private
 
-      def entry(kind=:entry, entry)
+      def entry(entry, kind=:entry)
         update_matching_status(
           @actual_tree.include?(entry),
-          not_found_msg_for(kind, entry))
+          not_found_msg_for(entry, kind))
       end
 
       def subtree(matcher)
         update_matching_status(matcher.match_found?, matcher.message) if matcher
       end
 
-      def is_a?(kind, entry)
+      def is_a?(entry, kind)
         update_matching_status(
-          @actual_tree.is_a?(kind, entry),
-          mismatch_msg_for(kind, entry))
+          @actual_tree.is_a?(entry, kind),
+          mismatch_msg_for(entry, kind))
       end
 
       def update_matching_status(check, msg)
@@ -53,11 +53,11 @@ module MiniTest
         @is_matching
       end
 
-      def not_found_msg_for(kind, entry)
+      def not_found_msg_for(entry, kind)
         "Expected `#{@actual_tree.root}` to contain #{kind} `#{entry}`."
       end
 
-      def mismatch_msg_for(kind, entry)
+      def mismatch_msg_for(entry, kind)
         "Expected `#{entry}` to be a #{kind}, but it was not."
       end
 
@@ -77,7 +77,7 @@ module MiniTest
           @tree.include?(expand_path(entry))
         end
 
-        def is_a?(kind, entry)
+        def is_a?(entry, kind)
           (expand_path entry).send("#{kind}?")
         end
 
