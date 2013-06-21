@@ -80,3 +80,9 @@ directories inside `root_dir` that the matcher won't care about).
 ### 0.0.1
 
 * Extract assertion and matcher from current projects
+
+### 0.1.0
+
+* Refactor existing code
+* Add more tests around assertion
+* Infect `must_exist_within` expectation
