@@ -1,6 +1,6 @@
 require 'pathname'
 
-module MiniTest
+module Minitest
   module FileSystem
     class Matcher
       def initialize(root, &block)

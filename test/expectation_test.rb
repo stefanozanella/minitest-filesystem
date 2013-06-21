@@ -41,7 +41,7 @@ describe "filesystem must_exist_within" do
       file "missing_file"
     }.must_exist_within(@root_dir) }
 
-    error = assert_raises(MiniTest::Assertion, &l)
+    error = assert_raises(Minitest::Assertion, &l)
     error.message.must_match(
       /expected `#{@root_dir}` to contain file `missing_file`/im)
   end

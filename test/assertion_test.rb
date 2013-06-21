@@ -54,7 +54,7 @@ describe "assert_contains_filesystem" do
       file "foo"
     end }
 
-    error = assert_raises(MiniTest::Assertion, &l)
+    error = assert_raises(Minitest::Assertion, &l)
     error.message.must_match(/expected `#{@root_dir}` to contain file `foo`/im)
   end
 
@@ -63,7 +63,7 @@ describe "assert_contains_filesystem" do
       dir "bar"
     end }
 
-    error = assert_raises(MiniTest::Assertion, &l)
+    error = assert_raises(Minitest::Assertion, &l)
     error.message.must_match(/expected `#{@root_dir}` to contain directory `bar`/im)
   end
 
@@ -74,7 +74,7 @@ describe "assert_contains_filesystem" do
       end
     end }
 
-    error = assert_raises(MiniTest::Assertion, &l)
+    error = assert_raises(Minitest::Assertion, &l)
     error.message.must_match(
       /expected `#{@root_dir + 'a_subdirectory'}` to contain file `missing_file`/im)
   end
@@ -84,7 +84,7 @@ describe "assert_contains_filesystem" do
       file "not_a_file"
     end }
 
-    error = assert_raises(MiniTest::Assertion, &l)
+    error = assert_raises(Minitest::Assertion, &l)
     error.message.must_match(/expected `not_a_file` to be a file/im)
   end
 
@@ -93,7 +93,7 @@ describe "assert_contains_filesystem" do
       dir "not_a_dir"
     end }
 
-    error = assert_raises(MiniTest::Assertion, &l)
+    error = assert_raises(Minitest::Assertion, &l)
     error.message.must_match(/expected `not_a_dir` to be a directory/im)
   end
 
@@ -104,7 +104,7 @@ describe "assert_contains_filesystem" do
       file "baz"
     end }
 
-    error = assert_raises(MiniTest::Assertion, &l)
+    error = assert_raises(Minitest::Assertion, &l)
     error.message.must_equal(failure_msg)
   end
 end
