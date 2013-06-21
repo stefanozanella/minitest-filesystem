@@ -1,6 +1,13 @@
+---
 language: ruby
+
 rvm:
   - 1.9.3
   - 2.0.0
   - jruby-19mode
   - rbx-19mode
+
+install: bundle install --path vendor/bundle
+
+script:
+  - bundle exec rake test
