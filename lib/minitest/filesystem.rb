@@ -6,4 +6,12 @@ module MiniTest::Assertions
     matcher = MiniTest::FileSystem::Matcher.new(dir, &block)
     assert matcher.match_found?, msg || matcher.message
   end
+
+  def filesystem(&block)
+    block
+  end
+end
+
+module MiniTest::Expectations
+  infect_an_assertion :assert_contains_filesystem, :must_exist_within
 end

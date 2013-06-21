@@ -1,23 +1,24 @@
 require 'test_helper'
+
 require 'tmpdir'
 require 'fileutils'
 
 describe "assert_contains_filesystem" do
   before do
     @root_dir = Pathname.new(Dir.mktmpdir('minitestfs'))
-
+  
     (@root_dir + 'a_directory').mkdir
     (@root_dir + 'a_subdirectory').mkdir
     (@root_dir + 'a_subdirectory' + 'deeper_subdirectory').mkdir
     (@root_dir + 'not_a_file').mkdir
     (@root_dir + 'unchecked_dir').mkdir
-
+  
     FileUtils.touch(@root_dir + 'a_file')
     FileUtils.touch(@root_dir + 'not_a_dir')
     FileUtils.touch(@root_dir + 'a_subdirectory' + 'deeper_subdirectory' + 'another_file')
     FileUtils.touch(@root_dir + 'unchecked_file')
   end
-
+  
   after do
     FileUtils.rm_rf @root_dir
   end
@@ -75,8 +76,7 @@ describe "assert_contains_filesystem" do
 
     error = assert_raises(MiniTest::Assertion, &l)
     error.message.must_match(
-      /expected `#{@root_dir + 'a_subdirectory'}` to contain file `missing_file`/im
-    )
+      /expected `#{@root_dir + 'a_subdirectory'}` to contain file `missing_file`/im)
   end
 
   it "fails when a directory is expected to be a file" do
@@ -95,5 +95,16 @@ describe "assert_contains_filesystem" do
 
     error = assert_raises(MiniTest::Assertion, &l)
     error.message.must_match(/expected `not_a_dir` to be a directory/im)
+  end
+
+  it "allows to print custom error messages" do
+    failure_msg = "I really miss this file a lot"
+
+    l = lambda { assert_contains_filesystem(@root_dir, failure_msg) do
+      file "baz"
+    end }
+
+    error = assert_raises(MiniTest::Assertion, &l)
+    error.message.must_equal(failure_msg)
   end
 end

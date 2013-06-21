@@ -1,9 +1,12 @@
 .DS_Store
+*.swp
+*.swo
 *.gem
 *.rbc
 .bundle
 .config
 .yardoc
+.yardopts
 Gemfile.lock
 InstalledFiles
 _yardoc
