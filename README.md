@@ -5,7 +5,7 @@
 [![Code Climate](https://codeclimate.com/github/stefanozanella/minitest-filesystem.png)](https://codeclimate.com/github/stefanozanella/minitest-filesystem)
 [![Coverage Status](https://coveralls.io/repos/stefanozanella/minitest-filesystem/badge.png?branch=master)](https://coveralls.io/r/stefanozanella/minitest-filesystem?branch=master)
 
-Adds assertions and expectations to check filesystems content in a readable way.
+Adds assertions and expectations to check filesystem content in a communicative way.
 
 ## Installation
 
