@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Stefano Zanella"]
   gem.email         = ["zanella.stefano@gmail.com"]
   gem.description   = %q{Minitest exstension to check filesystem contents}
-  gem.description   = %q{Adds assertions and expectations to check the content
+  gem.summary       = %q{Adds assertions and expectations to check the content
                          of a filesystem tree with minitest}
   gem.homepage      = "https://github.com/stefanozanella/minitest-filesystem"
   gem.license       = "MIT"
