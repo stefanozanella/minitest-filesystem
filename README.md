@@ -86,3 +86,7 @@ directories inside `root_dir` that the matcher won't care about).
 * Refactor existing code
 * Add more tests around assertion
 * Infect `must_exist_within` expectation
+
+### 1.0.0
+
+* Add support for Ruby 1.8.
