@@ -8,12 +8,13 @@ describe "assert_contains_filesystem" do
 
     (@root_dir + 'a_directory').mkdir
     (@root_dir + 'a_subdirectory').mkdir
+    (@root_dir + 'a_subdirectory' + 'deeper_subdirectory').mkdir
     (@root_dir + 'not_a_file').mkdir
     (@root_dir + 'unchecked_dir').mkdir
 
     FileUtils.touch(@root_dir + 'a_file')
     FileUtils.touch(@root_dir + 'not_a_dir')
-    FileUtils.touch(@root_dir + 'a_subdirectory' + 'another_file')
+    FileUtils.touch(@root_dir + 'a_subdirectory' + 'deeper_subdirectory' + 'another_file')
     FileUtils.touch(@root_dir + 'unchecked_file')
   end
 
@@ -37,10 +38,12 @@ describe "assert_contains_filesystem" do
     end
   end
 
-  it "passes when a file within a subdirectory is found" do
+  it "passes when a file within a nested subtree is found" do
     assert_contains_filesystem(@root_dir) do
       dir "a_subdirectory" do
-        file "another_file"
+        dir "deeper_subdirectory" do
+          file "another_file"
+        end
       end
     end
   end
