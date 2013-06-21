@@ -30,7 +30,7 @@ module MiniTest
 
       private
 
-      def entry(kind = :entry, entry)
+      def entry(kind=:entry, entry)
         update_matching_status(
           @actual_tree.include?(entry),
           not_found_msg_for(kind, entry))
