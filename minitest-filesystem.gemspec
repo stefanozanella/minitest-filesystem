@@ -29,5 +29,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "coveralls"
 
   gem.signing_key = Pathname.new(signing_key_file).expand_path if signing_key_file
-  spec.cert_chain  = ["rubygems-stefanozanella.crt"]
+  gem.cert_chain  = ["rubygems-stefanozanella.crt"]
 end
