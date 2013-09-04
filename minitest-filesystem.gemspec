@@ -1,7 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+$:.unshift(lib) unless $:.include?(lib)
+
+require 'pathname'
 require 'minitest/filesystem/version'
+
+signing_key_file = ENV['RUBYGEMS_SIGNING_KEY_FILE']
 
 Gem::Specification.new do |gem|
   gem.name          = "minitest-filesystem"
@@ -23,4 +27,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rake"
   gem.add_development_dependency "minitest"
   gem.add_development_dependency "coveralls"
+
+  gem.signing_key = Pathname.new(signing_key_file).expand_path if signing_key_file
+  spec.cert_chain  = ["rubygems-stefanozanella.crt"]
 end

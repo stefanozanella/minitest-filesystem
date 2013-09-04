@@ -5,6 +5,7 @@
 *.rbc
 .bundle
 .config
+.envrc
 .yardoc
 .yardopts
 Gemfile.lock
