@@ -41,7 +41,7 @@ Let's suppose the following filesystem structure exists:
   * `subdir_2/`
   * `subdir_3/`
       * `link_1`
-      * `link_1`, `'../../file_1'`
+      * `link_2`, `'../../file_1'`
 
 You can check if `root_dir` contains a specific structure:
 
