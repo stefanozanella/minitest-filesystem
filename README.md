@@ -86,7 +86,9 @@ directories inside `root_dir` that the matcher won't care about).
 
 ## Changelog
 
-* Add support for testing presence of links
+### 1.1.0
+
+* Add support for testing symbolic links
 
 ### 1.0.1
 
