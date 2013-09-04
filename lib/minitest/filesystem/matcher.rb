@@ -13,6 +13,10 @@ module Minitest
         entry(file, :file) && is_a?(file, :file)
       end
 
+      def link(link, target=nil)
+        entry(link, :symlink) && is_a?(link, :symlink) && is_target_correct?(link, target)
+      end
+
       def dir(dir, &block)
         matcher = self.class.new(@actual_tree.expand_path(dir), &block) if block_given?
 
@@ -36,8 +40,20 @@ module Minitest
           not_found_msg_for(entry, kind))
       end
 
+      def is_target_correct?(link, target)
+        return true unless target
+
+        update_matching_status(
+          @actual_tree.expand_path(target) == follow_link(@actual_tree.expand_path(link)),
+          link_target_mismatch_msg_for(link, target))
+      end
+
       def subtree(matcher)
         update_matching_status(matcher.match_found?, matcher.message) if matcher
+      end
+
+      def follow_link(link)
+        Pathname.new(File.readlink(link))
       end
 
       def is_a?(entry, kind)
@@ -59,6 +75,10 @@ module Minitest
 
       def mismatch_msg_for(entry, kind)
         "Expected `#{entry}` to be a #{kind}, but it was not."
+      end
+
+      def link_target_mismatch_msg_for(link, target)
+        "Expected `#{link}` to point to `#{target}`, but it pointed to #{File.readlink(@actual_tree.expand_path(link))}"
       end
 
       def set_failure_msg(msg)

@@ -14,7 +14,11 @@ describe "assert_contains_filesystem" do
     (@root_dir + 'unchecked_dir').mkdir
   
     FileUtils.touch(@root_dir + 'a_file')
+    FileUtils.touch(@root_dir + 'actual_file')
+    FileUtils.ln_s(@root_dir + 'doesnt_matter', @root_dir + 'a_link')
+    FileUtils.ln_s(@root_dir + 'actual_file', @root_dir + 'link_to')
     FileUtils.touch(@root_dir + 'not_a_dir')
+    FileUtils.touch(@root_dir + 'not_a_link')
     FileUtils.touch(@root_dir + 'a_subdirectory' + 'deeper_subdirectory' + 'another_file')
     FileUtils.touch(@root_dir + 'unchecked_file')
   end
@@ -30,6 +34,18 @@ describe "assert_contains_filesystem" do
   it "passes when single file found" do
     assert_contains_filesystem(@root_dir) do
       file "a_file"
+    end
+  end
+
+  it "passes when single link found" do
+    assert_contains_filesystem(@root_dir) do
+      link "a_link"
+    end
+  end
+
+  it "passes when a link points to the correct target" do
+    assert_contains_filesystem(@root_dir) do
+      link "link_to", "actual_file"
     end
   end
 
@@ -56,6 +72,24 @@ describe "assert_contains_filesystem" do
 
     error = assert_raises(Minitest::Assertion, &l)
     error.message.must_match(/expected `#{@root_dir}` to contain file `foo`/im)
+  end
+
+  it "fails when an expected symlink isn't found" do
+    l = lambda { assert_contains_filesystem(@root_dir) do
+      link "foo"
+    end }
+
+    error = assert_raises(Minitest::Assertion, &l)
+    error.message.must_match(/expected `#{@root_dir}` to contain symlink `foo`/im)
+  end
+
+  it "fails when a symlink points to the wrong file" do
+    l = lambda { assert_contains_filesystem(@root_dir) do
+      link "link_to", "nonexistent_target"
+    end }
+
+    error = assert_raises(Minitest::Assertion, &l)
+    error.message.must_match(/expected `link_to` to point to `nonexistent_target`/im)
   end
 
   it "fails when an expected directory isn't found" do
@@ -95,6 +129,15 @@ describe "assert_contains_filesystem" do
 
     error = assert_raises(Minitest::Assertion, &l)
     error.message.must_match(/expected `not_a_dir` to be a directory/im)
+  end
+
+  it "fails when a file is expected to be a symlink" do
+    l = lambda { assert_contains_filesystem(@root_dir) do
+      link "not_a_link"
+    end }
+
+    error = assert_raises(Minitest::Assertion, &l)
+    error.message.must_match(/expected `not_a_link` to be a symlink/im)
   end
 
   it "allows to print custom error messages" do

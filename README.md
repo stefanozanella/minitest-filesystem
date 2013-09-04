@@ -39,6 +39,9 @@ Let's suppose the following filesystem structure exists:
       * `subfile_2`
       * `subsubdir_1/`
   * `subdir_2/`
+  * `subdir_3/`
+      * `link_1`
+      * `link_1`, '../../file_1'
 
 You can check if `root_dir` contains a specific structure:
 
@@ -49,6 +52,9 @@ assert_contains_filesystem("root_dir") do
     file "subfile_1"
   end
   dir "subdir_2"
+  dir "subdir_3" do
+    link "link_1"
+  end
 end
 ```
 
@@ -61,6 +67,9 @@ filesystem {
     file "subfile_1"
   end
   dir "subdir_2"
+  dir "subdir_3" do
+    link "link_1"
+  end
 }.must_exist_within "root_dir"
 ```
 
@@ -76,6 +85,8 @@ directories inside `root_dir` that the matcher won't care about).
 5. Create new Pull Request
 
 ## Changelog
+
+* Add support for testing presence of links
 
 ### 1.0.1
 
