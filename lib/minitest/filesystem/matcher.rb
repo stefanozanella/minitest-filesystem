@@ -10,17 +10,17 @@ module Minitest
       end
 
       def file(file)
-        entry(file, :file) && is_a?(file, :file)
+        exists?(file, :file)
       end
 
       def link(link, target=nil)
-        entry(link, :symlink) && is_a?(link, :symlink) && is_target_correct?(link, target)
+        exists?(link, :symlink) && is_target_correct?(link, target)
       end
 
       def dir(dir, &block)
         matcher = self.class.new(@actual_tree.expand_path(dir), &block) if block_given?
 
-        entry(dir, :directory) && is_a?(dir, :directory) && subtree(matcher)
+        exists?(dir, :directory) && subtree(matcher)
       end
 
       def match_found?
@@ -34,32 +34,38 @@ module Minitest
 
       private
 
+      # Checks existance of specified entry.
+      # Existance is defined both in terms of presence and of being of the
+      # right type (e.g. a file being a file and not a directory)
+      def exists?(entry, kind=:entry)
+        entry(entry, kind) && is_a?(entry, kind)
+      end
+
+      # Checks if an entry with given name exists.
       def entry(entry, kind=:entry)
         update_matching_status(
           @actual_tree.include?(entry),
           not_found_msg_for(entry, kind))
       end
 
+      # Checks if a specific entry (supposed to exist) is of a given kind.
+      def is_a?(entry, kind)
+        update_matching_status(
+          @actual_tree.is_a?(entry, kind),
+          mismatch_msg_for(entry, kind))
+      end
+
+      # Checks the target of a symbolic link.
       def is_target_correct?(link, target)
         return true unless target
 
         update_matching_status(
-          @actual_tree.expand_path(target) == follow_link(@actual_tree.expand_path(link)),
+          @actual_tree.has_target?(link, target),
           link_target_mismatch_msg_for(link, target))
       end
 
       def subtree(matcher)
         update_matching_status(matcher.match_found?, matcher.message) if matcher
-      end
-
-      def follow_link(link)
-        Pathname.new(File.readlink(link))
-      end
-
-      def is_a?(entry, kind)
-        update_matching_status(
-          @actual_tree.is_a?(entry, kind),
-          mismatch_msg_for(entry, kind))
       end
 
       def update_matching_status(check, msg)
@@ -78,7 +84,7 @@ module Minitest
       end
 
       def link_target_mismatch_msg_for(link, target)
-        "Expected `#{link}` to point to `#{target}`, but it pointed to #{File.readlink(@actual_tree.expand_path(link))}"
+        "Expected `#{link}` to point to `#{target}`, but it pointed to #{@actual_tree.follow_link(link)}"
       end
 
       def set_failure_msg(msg)
@@ -100,9 +106,17 @@ module Minitest
         def is_a?(entry, kind)
           (expand_path entry).send("#{kind}?")
         end
+        
+        def has_target?(entry, target)
+          expand_path(target) == follow_link(entry)
+        end
 
         def expand_path(file)
           @root + Pathname.new(file)
+        end
+
+        def follow_link(link)
+          Pathname.new(File.readlink(expand_path(link)))
         end
 
         private
