@@ -86,6 +86,10 @@ directories inside `root_dir` that the matcher won't care about).
 
 ## Changelog
 
+### 1.1.1
+
+* Minor refactorings and project infrastructure updates.
+
 ### 1.1.0
 
 * Add support for testing symbolic links
