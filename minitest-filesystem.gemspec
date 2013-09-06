@@ -27,6 +27,8 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rake"
   gem.add_development_dependency "minitest"
   gem.add_development_dependency "coveralls"
+  gem.add_development_dependency "flog"
+  gem.add_development_dependency "flay"
 
   gem.signing_key = Pathname.new(signing_key_file).expand_path if signing_key_file
   gem.cert_chain  = ["rubygems-stefanozanella.crt"]
