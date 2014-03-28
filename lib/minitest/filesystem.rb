@@ -11,6 +11,10 @@ module Minitest::Assertions
     assert File.exists?(path), msg || "expected `#{path}` to exist, but it doesn't"
   end
 
+  def refute_exists(path, msg = nil, &block)
+    refute File.exists?(path), msg || "expected `#{path}` not to exist, but it does"
+  end
+
   def filesystem(&block)
     block
   end
