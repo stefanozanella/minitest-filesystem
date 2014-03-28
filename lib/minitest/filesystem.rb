@@ -22,4 +22,5 @@ end
 
 module Minitest::Expectations
   infect_an_assertion :assert_contains_filesystem, :must_exist_within
+  infect_an_assertion :assert_exists, :must_exist, :unary
 end
