@@ -1,6 +1,6 @@
 require 'test_helper'
 
-describe "filesystem must_exist_within" do
+describe "must_exist" do
   let(:a_path) { Pathname.new("/lmao/if/this/exists") }
 
   it "fails when the expected path doesn't exist" do
@@ -8,4 +8,3 @@ describe "filesystem must_exist_within" do
     assert_raises(Minitest::Assertion, &l)
   end
 end
-
