@@ -1,7 +1,5 @@
 require 'test_helper'
 
-require 'tmpdir'
-
 describe "wont_exist" do
   let(:a_path) { Pathname.new(Dir.mktmpdir('minitestfs')) }
 
