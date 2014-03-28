@@ -29,6 +29,7 @@ require 'minitest/filesystem'
 
 ## Usage
 
+### Testing for a filesystem subtree
 Let's suppose the following filesystem structure exists:
 
 * `root_dir/`
@@ -76,6 +77,37 @@ filesystem {
 Note that the match **need not to be exact** (i.e. there can be other files and
 directories inside `root_dir` that the matcher won't care about).
 
+### Syntactic sugar
+
+As a nicety, some custom assertions/matchers are provided to make your test
+suites look better. They're almost just syntactic sugar around the methods
+provided by `File`, `Dir` et al, but allow for improved code readability. So,
+for example, instead of writing
+
+  assert File.exists? "/a/file"
+
+you can write
+
+  assert_exists "/a/file"
+
+or, even better
+
+  "/a/file".must_exist
+
+**Assertions**
+
+* `assert_exists`: test whether a specific path exists (no matter if file, dir,
+  symlink)
+* `refute_exists`: test whether a specific path doesn't exist (no matter if file, dir,
+  symlink)
+
+** Expectations**
+
+The meaning of the following expectation is the same as their assertive
+counterpart:
+* `must_exist`
+* `wont_exist`
+
 ## Contributing
 
 1. Fork it
@@ -85,6 +117,11 @@ directories inside `root_dir` that the matcher won't care about).
 5. Create new Pull Request
 
 ## Changelog
+
+### 1.2.0
+
+* Added `assert_exists`, `refute_exists`, `must_exist`, `wont_exist`
+* Refactored previous test code to lighter syntax
 
 ### 1.1.1
 
