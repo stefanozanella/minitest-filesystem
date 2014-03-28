@@ -84,7 +84,7 @@ suites look better. They're almost just syntactic sugar around the methods
 provided by `File`, `Dir` et al, but allow for improved code readability. So,
 for example, instead of writing
 
-  assert File.exists? "/a/file"
+    assert File.exists? "/a/file"
 
 you can write
 
