@@ -88,11 +88,11 @@ for example, instead of writing
 
 you can write
 
-  assert_exists "/a/file"
+    assert_exists "/a/file"
 
 or, even better
 
-  "/a/file".must_exist
+    "/a/file".must_exist
 
 **Assertions**
 
@@ -101,7 +101,7 @@ or, even better
 * `refute_exists`: test whether a specific path doesn't exist (no matter if file, dir,
   symlink)
 
-** Expectations**
+**Expectations**
 
 The meaning of the following expectation is the same as their assertive
 counterpart:
