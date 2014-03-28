@@ -7,6 +7,10 @@ module Minitest::Assertions
     assert matcher.match_found?, msg || matcher.message
   end
 
+  def assert_exists(path, msg = nil, &block)
+    assert File.exists?(path), msg || "expected `#{path}` to exist, but it doesn't"
+  end
+
   def filesystem(&block)
     block
   end
