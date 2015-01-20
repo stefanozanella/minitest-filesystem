@@ -13,3 +13,7 @@ bundler_args: --path vendor/bundle
 
 script:
   - bundle exec rake test
+
+addons:
+  code_climate:
+    repo_token:
