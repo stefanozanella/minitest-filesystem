@@ -2,8 +2,8 @@
 
 [![Gem Version](https://badge.fury.io/rb/minitest-filesystem.svg)](http://badge.fury.io/rb/minitest-filesystem)
 [![Build Status](https://travis-ci.org/stefanozanella/minitest-filesystem.svg?branch=master)](https://travis-ci.org/stefanozanella/minitest-filesystem)
-[![Code Climate](https://codeclimate.com/github/stefanozanella/minitest-filesystem.svg)](https://codeclimate.com/github/stefanozanella/minitest-filesystem)
-[![Coverage Status](https://coveralls.io/repos/stefanozanella/minitest-filesystem/badge.png?branch=master)](https://coveralls.io/r/stefanozanella/minitest-filesystem?branch=master)
+[![Code Climate](https://codeclimate.com/github/stefanozanella/minitest-filesystem/badges/gpa.svg)](https://codeclimate.com/github/stefanozanella/minitest-filesystem)
+[![Test Coverage](https://codeclimate.com/github/stefanozanella/minitest-filesystem/badges/coverage.svg)](https://codeclimate.com/github/stefanozanella/minitest-filesystem)
 
 Adds assertions and expectations to check filesystem content in a communicative way.
 
